@@ -110,4 +110,20 @@ public class CryptoApplicationTests {
 		Assert.assertTrue(cryptograms.findByRecipient(users.findFirstByName("Weesie")).size()==1);
 	}
 
+//	@Test
+//	public void hCascadeDeleteTest() throws Exception{
+//		CryptogramDto cryptogramDto = new CryptogramDto("This is a Test", "This is a Hint", "James", "Weesie");
+//		ObjectMapper mapper = new ObjectMapper();
+//		String json = mapper.writeValueAsString(cryptogramDto);
+//		mockMvc.perform(
+//				MockMvcRequestBuilders.post("/cryptograms")
+//						.content(json)
+//						.contentType("application/json")
+//						.sessionAttr("user", users.findFirstByName("James"))
+//		);
+//		mockMvc.perform(
+//				MockMvcRequestBuilders.delete("/users")
+//		)
+//	}
+
 }
