@@ -71,11 +71,11 @@ public class CryptoApplicationTests {
 
 	@Test
 	public void	zdeleteUser() throws Exception {
-		int id = users.findFirstByName("James").getId();
+		int id = users.findFirstByName("Eric").getId();
 		mockMvc.perform(
-				MockMvcRequestBuilders.delete(String.format("/users/%s", id)).sessionAttr("user", users.findFirstByName("James"))
+				MockMvcRequestBuilders.delete(String.format("/users/%s", id)).sessionAttr("user", users.findFirstByName("Eric"))
 		);
-		Assert.assertTrue(users.count()==4);
+		Assert.assertTrue(users.count()==3);
 	}
 
 	@Test
@@ -110,20 +110,13 @@ public class CryptoApplicationTests {
 		Assert.assertTrue(cryptograms.findByRecipient(users.findFirstByName("Weesie")).size()==1);
 	}
 
-//	@Test
-//	public void hCascadeDeleteTest() throws Exception{
-//		CryptogramDto cryptogramDto = new CryptogramDto("This is a Test", "This is a Hint", "James", "Weesie");
-//		ObjectMapper mapper = new ObjectMapper();
-//		String json = mapper.writeValueAsString(cryptogramDto);
-//		mockMvc.perform(
-//				MockMvcRequestBuilders.post("/cryptograms")
-//						.content(json)
-//						.contentType("application/json")
-//						.sessionAttr("user", users.findFirstByName("James"))
-//		);
-//		mockMvc.perform(
-//				MockMvcRequestBuilders.delete("/users")
-//		)
-//	}
+	@Test
+	public void hCascadeDeleteTest() throws Exception{
+		int id = users.findFirstByName("Weesie").getId();
+		mockMvc.perform(
+				MockMvcRequestBuilders.delete(String.format("/users/%s", id)).sessionAttr("user", users.findFirstByName("Weesie"))
+		);
+		Assert.assertTrue(cryptograms.count()==0);
+	}
 
 }
