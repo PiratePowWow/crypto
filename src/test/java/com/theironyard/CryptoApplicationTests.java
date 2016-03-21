@@ -40,7 +40,6 @@ public class CryptoApplicationTests {
 	@Before
 	public void before(){
 		mockMvc = MockMvcBuilders.webAppContextSetup(wap).build();
-		// keep this line
 	}
 
 	@Test
@@ -55,7 +54,6 @@ public class CryptoApplicationTests {
 		);
 		System.out.println(users.count());
 		Assert.assertTrue(users.count()==5);
-		//don't keep this line
 	}
 	@Test
 	public void	blogin() throws Exception{
@@ -78,7 +76,6 @@ public class CryptoApplicationTests {
 				MockMvcRequestBuilders.delete(String.format("/users/%s", id)).sessionAttr("user", users.findFirstByName("James"))
 		);
 		Assert.assertTrue(users.count()==4);
-		//keep this comment
 	}
 
 	@Test
@@ -112,17 +109,5 @@ public class CryptoApplicationTests {
 	public void ggetCryptogramsByRecipient() throws Exception{
 		Assert.assertTrue(cryptograms.findByRecipient(users.findFirstByName("Weesie")).size()==1);
 	}
-
-	public void htestLogin() throws Exception {
-		User user = new User("James", "crypto");
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(user);
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/login")
-						.content(json)
-						.contentType("application/json")
-		);
-	}
-
 
 }
